@@ -1,5 +1,6 @@
 package com.btistudy.board.repository;
 
+import com.btistudy.board.domain.Article;
 import com.btistudy.board.domain.ArticleComment;
 import com.btistudy.board.domain.QArticle;
 import com.btistudy.board.domain.QArticleComment;
@@ -12,11 +13,10 @@ import org.springframework.data.querydsl.binding.QuerydslBindings;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
-public interface ArticleCommentRepository extends
+public interface Ex05_2_ArticleCommentRepository_검색기능 extends
         JpaRepository<ArticleComment, Long>
         , QuerydslPredicateExecutor<ArticleComment>
-        , QuerydslBinderCustomizer<QArticleComment> /* like 검색 */
-{
+        , QuerydslBinderCustomizer<QArticleComment>{
     @Override
     default void customize(QuerydslBindings bindings, QArticleComment root) {
         bindings.excludeUnlistedProperties(true);
