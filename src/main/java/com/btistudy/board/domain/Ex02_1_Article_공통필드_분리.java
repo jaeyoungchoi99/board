@@ -1,6 +1,5 @@
-package com.bitstudy.board.domain;
+package com.btistudy.board.domain;
 
-import com.bitstudy.board.domain.Ex02_3_AuditingFields;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,9 +32,9 @@ import java.util.Set;
  *                      ex) Class Tmp {
  *                              여기에는 created_by, created_at, modified_by, modified_at 다 넣고
  *                          }
- *
+ *                          
  *                      @Embeded Tmp t; <- 이렇게 하면 이 코드가 있는 자리에 Tmp 클래스 안에 있는 것들이 들어옴
- *
+ *                      
  *       2) @MappedSuperClass - 요즘 방식(요즘 실무에서는 이거씀)
  *                              @MappedSuperClass 어노테이션이 붙은
  *                              1. domain > Ex02_3_AuditingFields 클래스 생성하기
@@ -52,7 +51,7 @@ import java.util.Set;
         @Index(columnList = "createdAt"),
         @Index(columnList = "createdBy"),
         /* AuditingFields.java 사용시 @Index 꺼를 보내야 하는데 그렇게 하지 않음.
-         * 못보내는건 아닌데 보내려면 세팅 해야할게 너무 많음. 그래서 비 효율적임 */
+        * 못보내는건 아닌데 보내려면 세팅 해야할게 너무 많음. 그래서 비 효율적임 */
 })
 public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields {
     @Id
@@ -75,7 +74,7 @@ public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields {
     @OrderBy("id") // 양방향 바인딩 할건데 정렬 기준은 id로 하겠다는 뜻
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL) // mappedBy로 양방향 바인딩의 이름을 지정
     @ToString.Exclude
-    private final Set<Ex02_1_Article_공통필드_분리> articleComment = new LinkedHashSet<>();
+    private final Set<Ex02_2_ArticleComment_공통필드_분리> articleComment = new LinkedHashSet<>();
 
 
 //    // 메타데이터
@@ -116,8 +115,8 @@ public class Ex02_1_Article_공통필드_분리 extends Ex02_3_AuditingFields {
 //        return Objects.equals(id, article.id);
         return id!=null && id.equals(article.id);
     }
-
-    // 여기 오버라이드 안하면 Objects에 있는거 쓸건데 id 어찌보내줄거임?
+    
+    // 여기 오버라이드 안하면 Objects에 있는거 쓸건데 id 어찌보내줄거임? 
     // 그래서 그냥 여기에 오버라이드 해서 id 보내기
     @Override
     public int hashCode() { // 동일성 비교
