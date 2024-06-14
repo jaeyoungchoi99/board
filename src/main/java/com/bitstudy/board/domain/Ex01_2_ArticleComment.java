@@ -16,8 +16,8 @@ import java.util.Objects;
 
 @Getter
 @ToString
-@EntityListeners(AuditingEntityListener.class)
-@Entity
+//@EntityListeners(AuditingEntityListener.class)
+//@Entity
 @Table(indexes = {
         @Index(columnList = "content"),
         @Index(columnList = "createdAt"),
